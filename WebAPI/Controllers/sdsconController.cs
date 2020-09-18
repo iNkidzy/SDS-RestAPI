@@ -59,5 +59,7 @@ namespace WebAPI.Controllers
              _avatarService.DeleteAvatar(id);
         }
     }
+        
 }
+
 

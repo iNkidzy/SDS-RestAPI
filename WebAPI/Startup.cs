@@ -14,6 +14,7 @@ using SDS.Core.AplicationService;
 using SDS.Core.AplicationService.Services;
 using SDS.Core.DomainService;
 using SDS.Core.Entity;
+using SDS.Infrastructure.data;
 using SDS.Infrastructure.data.Repositories;
 
 namespace WebAPI
@@ -48,8 +49,16 @@ namespace WebAPI
             using (var scope = app.ApplicationServices.CreateScope())
             {
                 var repo = scope.ServiceProvider.GetRequiredService<IAvatarRepository>();
-                repo.Create(new Avatar { Name = "Bunsy", Type ="Bunny", Color ="Blue"});
-                repo.Create(new Avatar { Name = "Chili", Type = "Magician", Color = "Pink" });
+                //repo.Create(new Avatar { Name = "Bunsy", Type ="Bunny", Color ="Blue"});
+                //repo.Create(new Avatar { Name = "Chili", Type = "Magician", Color = "Pink" });
+
+                IAvatarRepository avatarRepository = new AvatarRepo();
+
+                DBinitializer dBinitializer = new DBinitializer(avatarRepository);
+                dBinitializer.InitData();
+                IAvatarService avatarService = new AvatarService(avatarRepository);
+
+
             }
 
             //YOU DID GITHUB WIHT TERMINAL !!! 
