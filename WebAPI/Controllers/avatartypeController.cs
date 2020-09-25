@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SDS.Core.AplicationService;
+using SDS.Core.Entity;
+using SDS.Infrastructure.data;
 
 namespace WebAPI
 {
@@ -11,36 +14,47 @@ namespace WebAPI
     [ApiController]
     public class avatartypeController : ControllerBase
     {
+        private readonly IAvatarTypeService _avatarTypeService;
+
+        public avatartypeController(IAvatarTypeService avatarTypeService)
+        {
+
+            _avatarTypeService = avatarTypeService;
+        }
+
         // GET: api/avatartype
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<AvatarType> Get()
         {
-            return new string[] { "value1", "value2" };
+            return DBinitializer.GetAvatarTypes();
         }
 
         // GET: api/avatartype/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public ActionResult<AvatarType> Get(int id)
         {
-            return "value";
+            return _avatarTypeService.FindAvatarById(id);
         }
 
         // POST: api/avatartype
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<AvatarType> Post([FromBody] AvatarType avatarType)
         {
+            return _avatarTypeService.Create(avatarType);
         }
 
         // PUT: api/avatartype/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<AvatarType> Put(int id, [FromBody] AvatarType avatarType)
         {
+           return _avatarTypeService.UpdateAvatar(avatarType);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<AvatarType> Delete(int id)
         {
+           return _avatarTypeService.DeleteAvatar(id);
         }
     }
 }

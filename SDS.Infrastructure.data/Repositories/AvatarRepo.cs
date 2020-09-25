@@ -7,15 +7,16 @@ namespace SDS.Infrastructure.data.Repositories
 {
     public class AvatarRepo:IAvatarRepository
     {
-        static int id = 1;
+        
         private static List<Avatar> _avatarLst = new List<Avatar>();
-        
-        
+        public static int id = 1;
+
 
         public Avatar Create(Avatar avatar)
         {
-            avatar.Id = id++;
-            _avatarLst.Add(avatar);
+            avatar.Id = DBinitializer.GetNextId();
+            var list = DBinitializer.GetAvatars();
+            list.Add(avatar);
             return avatar;
         }
 
@@ -24,16 +25,12 @@ namespace SDS.Infrastructure.data.Repositories
             return _avatarLst;
         }
 
-        public Avatar GetAvatarById(int id)
+        public Avatar GetAvatarById(int Id)
         {
-            foreach (var avatar in _avatarLst)
-            {
-                if (avatar.Id == id)
-                {
-                    return avatar;
-                }
-            }
-            return null;
+            var avatarLst = DBinitializer.GetAvatars();
+            var avatar = avatarLst.Find(x => x.Id == Id);
+            
+            return avatar;
         }
 
 
@@ -58,15 +55,23 @@ namespace SDS.Infrastructure.data.Repositories
 
         public Avatar Delete(int id)
         {
-            var avatarFound = this.GetAvatarById(id);
-            if (avatarFound != null)
+
+            Avatar a = GetAvatars().Find(x => x.Id == id);
+            GetAvatars().Remove(a);
+            if (a != null)
             {
-                _avatarLst.Remove(avatarFound);
-                return avatarFound;
+                
+                return a;
             }
             return null;
         }
-       
+
+        public List<Avatar> GetAvatars()
+        {
+
+            var avatarLst = DBinitializer.GetAvatars();
+            return avatarLst;
+        }
 
 
 

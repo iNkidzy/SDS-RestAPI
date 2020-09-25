@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SDS.Core.AplicationService;
 using SDS.Core.Entity;
+using SDS.Infrastructure.data;
 
 namespace WebAPI.Controllers
 {
@@ -25,12 +26,19 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IEnumerable<Avatar> Get()
         {
-            return _avatarService.GetAvatars();
+             return DBinitializer.GetAvatars();
+            //return _avatarService.GetAvatars(); <-- Get this working ERROR:Service/Repos
         }
 
+        /// <Get>
+        /// ACtion REsult 
+        /// </Method>
+        /// <param name="id"></param>
+        /// <returns></returns>
         // GET: api/sdscon/5
-        [HttpGet("{id}", Name = "Get")]
-        public Avatar Get(int id)
+       // [HttpGet("{id}", Name = "Get")]
+        [HttpGet("{id}")]
+        public ActionResult<Avatar> Get(int id)
         {
             return _avatarService.FindAvatarById(id);
         }
@@ -40,23 +48,23 @@ namespace WebAPI.Controllers
 
 
         [HttpPost]
-        public void Post([FromBody] Avatar avatar)
+        public ActionResult<Avatar> Post([FromBody] Avatar avatar)
         {
-            _avatarService.Create(avatar);
+           return _avatarService.Create(avatar);
         }
 
         // PUT: api/sdscon/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] Avatar avatar)
+        public ActionResult<Avatar> Put(int id, [FromBody] Avatar avatar)
         {
-            _avatarService.UpdateAvatar(avatar);
+            return _avatarService.UpdateAvatar(avatar);
         }
         //nnfnf
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Avatar> Delete(int id)
         {
-             _avatarService.DeleteAvatar(id);
+           return  _avatarService.DeleteAvatar(id);
         }
     }
         

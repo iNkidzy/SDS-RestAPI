@@ -4,6 +4,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SDS.Core.AplicationService;
+using SDS.Core.Entity;
+using SDS.Infrastructure.data;
 
 namespace WebAPI
 {
@@ -11,36 +14,48 @@ namespace WebAPI
     [ApiController]
     public class ownerController : ControllerBase
     {
+        private readonly IOwnerService _ownerService;
+
+        public ownerController(IOwnerService ownerService)
+        {
+
+            _ownerService = ownerService;
+        }
+
+
         // GET: api/owner
         [HttpGet]
-        public IEnumerable<string> Get()
+        public IEnumerable<Owner> Get()
         {
-            return new string[] { "value1", "value2" };
+            return DBinitializer.GetOwners();
         }
 
         // GET: api/owner/5
-        [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        [HttpGet("{id}")]
+        public ActionResult<Owner> Get(int id)
         {
-            return "value";
+            return _ownerService.FindOwnerById(id);
         }
 
         // POST: api/owner
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<Owner> Post([FromBody] Owner owner)
         {
+           return  _ownerService.Create(owner);
         }
 
         // PUT: api/owner/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
+        public ActionResult<Owner> Put(int id, [FromBody] Owner owner)
         {
+           return _ownerService.UpdateOwner(owner);
         }
 
         // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<Owner> Delete(int id)
         {
+            return _ownerService.DeleteOwner(id);
         }
     }
 }

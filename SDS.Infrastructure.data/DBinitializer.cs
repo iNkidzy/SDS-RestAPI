@@ -1,21 +1,26 @@
 ﻿using System;
+using System.Collections.Generic;
 using SDS.Core.DomainService;
 using SDS.Core.Entity;
 
 namespace SDS.Infrastructure.data
 {
-    public class DBinitializer
+    public static class DBinitializer
     {
-        private readonly IAvatarRepository _avatarRepository;
+        public static List<Avatar> avatarLst = new List<Avatar>();
+        public static List<AvatarType> avatarTypeLst = new List<AvatarType>();
+        public static List<Owner> ownerLst = new List<Owner>();
+        public static int Id = 1;
+        public static int AvatarTypeId = 1;
+        public static int OwnerId = 1;
+        
 
-        public DBinitializer(IAvatarRepository avatarRepository)
+        public static void InitData()
         {
-            _avatarRepository = avatarRepository;
-        }
 
-        public void InitData()
-        {
-            _avatarRepository.Create(new Avatar
+
+            Random r = new Random();
+            avatarLst.Add(new Avatar
             {
 
                 Name = "Ban",
@@ -24,10 +29,11 @@ namespace SDS.Infrastructure.data
                 SoldDate = DateTime.Now.AddYears(-5),
                 Color = "Red",
                 Owner = "Nana",
-                Price = 2000
+                Price = 2000,
+                Id = Id++
 
             });
-            _avatarRepository.Create(new Avatar
+            avatarLst.Add(new Avatar
             {
 
                 Name = "Kiki",
@@ -36,11 +42,11 @@ namespace SDS.Infrastructure.data
                 SoldDate = DateTime.Now.AddYears(-5),
                 Color = "Green",
                 Owner = "Koko",
-                Price = 5
-
+                Price = 5,
+                Id = Id++
             });
 
-            _avatarRepository.Create(new Avatar
+            avatarLst.Add(new Avatar
             {
 
                 Name = "Chili",
@@ -49,10 +55,10 @@ namespace SDS.Infrastructure.data
                 SoldDate = DateTime.Now.AddYears(-5),
                 Color = "Red",
                 Owner = "Meliodas",
-                Price = 3
-
+                Price = 3,
+                Id = Id++
             });
-            _avatarRepository.Create(new Avatar
+            avatarLst.Add(new Avatar
             {
 
                 Name = "Kirito",
@@ -61,10 +67,11 @@ namespace SDS.Infrastructure.data
                 SoldDate = DateTime.Now.AddYears(-5),
                 Color = "Green",
                 Owner = "Koko",
-                Price = 4
+                Price = 4,
+                Id = Id++
 
             });
-            _avatarRepository.Create(new Avatar
+            avatarLst.Add(new Avatar
             {
 
                 Name = "Jerry",
@@ -73,10 +80,11 @@ namespace SDS.Infrastructure.data
                 SoldDate = DateTime.Now.AddYears(-5),
                 Color = "Red",
                 Owner = "Nana",
-                Price = 2
+                Price = 2,
+                Id = Id++
 
             });
-            _avatarRepository.Create(new Avatar
+            avatarLst.Add(new Avatar
             {
 
                 Name = "Marry",
@@ -85,9 +93,95 @@ namespace SDS.Infrastructure.data
                 SoldDate = DateTime.Now.AddYears(-5),
                 Color = "Green",
                 Owner = "Koko",
-                Price = 1
+                Price = 1,
+                Id = Id++
 
             });
+
+
+
+            avatarTypeLst.Add(new AvatarType
+            {
+                AvatarTypeName = "Cat",
+                AvatarTypeId = Id++
+
+            });
+
+            avatarTypeLst.Add(new AvatarType
+            {
+                AvatarTypeName = "Dog",
+                AvatarTypeId = Id++
+
+            });
+            avatarTypeLst.Add(new AvatarType
+            {
+                AvatarTypeName = "Lion",
+                AvatarTypeId = Id++
+
+            });
+            avatarTypeLst.Add(new AvatarType
+            {
+                AvatarTypeName = "Zebra",
+                AvatarTypeId = Id++
+
+            });
+
+            ownerLst.Add(new Owner
+            {
+                FirstName = "Honey",
+                LastName = "Bunny",
+                Address = "Havnegade",
+                PhoneNumber = "42213184",
+                Email = "Bunny@gmail.com",
+                OwnerId = Id++
+
+            });
+
+            ownerLst.Add(new Owner
+            {
+                FirstName = "Ronnie",
+                LastName = "Anderson",
+                Address = "Kirkegade",
+                PhoneNumber = "6748282",
+                Email = "RonnieA@gmail.com",
+                OwnerId = Id++
+
+            });
+
+
+            //foreach (Avatar avatar in avartarLists)
+            //{
+            //    int bdInt = r.Next(1, 100);
+            //    avatar.Birthday = DateTime.Now.AddYears(-1 * bdInt);
+            //    avatar.Birthday = avatar.Birthday.AddDays(r.Next(0, 365));
+            //    avatar.Birthday = avatar.Birthday.AddSeconds(r.Next(0, 60 * 60 * 24));
+            //    avatar.SoldDate = DateTime.Now.AddYears(-1 * r.Next(1, bdInt));
+            //    avatar.SoldDate = avatar.SoldDate.AddDays(r.Next(0, 365));
+            //    avatar.SoldDate = avatar.SoldDate.AddSeconds(r.Next(0, 60 * 60 * 24));
+            //}
+
+
+
+        }
+
+        public static List<Avatar> GetAvatars()
+        {
+            return avatarLst;
+        }
+
+        public static List<AvatarType>GetAvatarTypes()
+        {
+            return avatarTypeLst;
+        }
+        public static List<Owner> GetOwners()
+        {
+            return ownerLst;
+        }
+
+        public static int GetNextId()
+        {
+            return Id++;
+           
         }
     }
 }
