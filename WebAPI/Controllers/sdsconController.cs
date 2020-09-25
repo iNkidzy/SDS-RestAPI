@@ -26,21 +26,17 @@ namespace WebAPI.Controllers
         [HttpGet]
         public IEnumerable<Avatar> Get()
         {
-             return DBinitializer.GetAvatars();
-            //return _avatarService.GetAvatars(); <-- Get this working ERROR:Service/Repos
+          
+            return _avatarService.GetAvatars(); // <-- Get this working ERROR:Service/Repos
+            
         }
 
-        /// <Get>
-        /// ACtion REsult 
-        /// </Method>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        // GET: api/sdscon/5
+     
        // [HttpGet("{id}", Name = "Get")]
         [HttpGet("{id}")]
         public ActionResult<Avatar> Get(int id)
         {
-            return _avatarService.FindAvatarById(id);
+            return _avatarService.FindAvatarById(id); 
         }
 
         // POST: api/sdscon

@@ -7,9 +7,10 @@ namespace SDS.Infrastructure.data.Repositories
 {
     public class AvatarRepo:IAvatarRepository
     {
-        
-        private static List<Avatar> _avatarLst = new List<Avatar>();
-        public static int id = 1;
+
+       //Those DO NOTHING apperantly...
+       // private static List<Avatar> _avatarLst = new List<Avatar>();
+       // public static int id = 1;
 
 
         public Avatar Create(Avatar avatar)
@@ -22,7 +23,9 @@ namespace SDS.Infrastructure.data.Repositories
 
         public IEnumerable<Avatar> ReadAllAvatars()
         {
-            return _avatarLst;
+            // return _avatarLst;
+            var avatarLst = DBinitializer.GetAvatars();
+            return avatarLst;
         }
 
         public Avatar GetAvatarById(int Id)

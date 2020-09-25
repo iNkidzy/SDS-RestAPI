@@ -10,6 +10,7 @@ namespace SDS.Infrastructure.data
         public static List<Avatar> avatarLst = new List<Avatar>();
         public static List<AvatarType> avatarTypeLst = new List<AvatarType>();
         public static List<Owner> ownerLst = new List<Owner>();
+        
         public static int Id = 1;
         public static int AvatarTypeId = 1;
         public static int OwnerId = 1;
@@ -137,7 +138,7 @@ namespace SDS.Infrastructure.data
 
             });
 
-            ownerLst.Add(new Owner
+            ownerLst.Add(new Owner 
             {
                 FirstName = "Ronnie",
                 LastName = "Anderson",

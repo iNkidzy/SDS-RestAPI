@@ -9,8 +9,8 @@ namespace SDS.Infrastructure.data.Repositories
     {
 
         
-        private static List<AvatarType> _avatarTypeLst = new List<AvatarType>();
-        public static int id = 1;
+        //private static List<AvatarType> _avatarTypeLst = new List<AvatarType>();
+         //public static int id = 1;
 
 
         public AvatarType Create(AvatarType avatarType)
@@ -45,7 +45,7 @@ namespace SDS.Infrastructure.data.Repositories
         private List<AvatarType> GetAvatarTypes()
         {
             var avatarTypeLst = DBinitializer.GetNextId();
-            return DBinitializer.avatarTypeLst; //MAYBE
+            return DBinitializer.avatarTypeLst;    //<<<<<<<<This is WRONG!!! + ID
         }
 
         public AvatarType GetAvatarById(int Id)
@@ -58,7 +58,7 @@ namespace SDS.Infrastructure.data.Repositories
 
         public IEnumerable<AvatarType> ReadAllAvatars()
         {
-            return _avatarTypeLst;
+            return DBinitializer.GetAvatarTypes();
         }
 
         public AvatarType Update(AvatarType avatarUpdate)

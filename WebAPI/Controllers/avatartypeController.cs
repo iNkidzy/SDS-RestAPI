@@ -26,7 +26,7 @@ namespace WebAPI
         [HttpGet]
         public IEnumerable<AvatarType> Get()
         {
-            return DBinitializer.GetAvatarTypes();
+            return _avatarTypeService.ReadAllAvatars();
         }
 
         // GET: api/avatartype/5

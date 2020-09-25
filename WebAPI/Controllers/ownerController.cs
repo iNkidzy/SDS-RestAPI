@@ -27,7 +27,7 @@ namespace WebAPI
         [HttpGet]
         public IEnumerable<Owner> Get()
         {
-            return DBinitializer.GetOwners();
+            return _ownerService.GetOwners();
         }
 
         // GET: api/owner/5
