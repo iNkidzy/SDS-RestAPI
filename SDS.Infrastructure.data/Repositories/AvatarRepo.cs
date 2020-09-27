@@ -39,7 +39,7 @@ namespace SDS.Infrastructure.data.Repositories
 
         public Avatar Update(Avatar avatarUpdate)
         {
-            var avatarFromDB = this.GetAvatarById(avatarUpdate.Id);
+            var avatarFromDB = GetAvatarById(avatarUpdate.Id);
             if (avatarFromDB != null)
             {
                 avatarFromDB.Name = avatarUpdate.Name;
@@ -50,10 +50,12 @@ namespace SDS.Infrastructure.data.Repositories
                 avatarFromDB.Owner = avatarUpdate.Owner;
                 avatarFromDB.Price = avatarUpdate.Price;
 
+
                 return avatarFromDB;
             }
 
             return null;
+            
         }
 
         public Avatar Delete(int id)

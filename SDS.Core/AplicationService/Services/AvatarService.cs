@@ -53,6 +53,23 @@ namespace SDS.Core.AplicationService.Services
             return _avatarRepo.ReadAllAvatars().ToList();
         }
 
+       
+
+        public Avatar DeleteAvatar(int id)
+        {
+           return _avatarRepo.Delete(id);
+        }
+
+        public Avatar Update(Avatar avatar)
+        {
+            if(avatar.Name.Length<1)
+            {
+                throw new InvalidDataException("Name must be atleast 1 charecter");
+            }
+            return _avatarRepo.Update(avatar);
+  
+        }
+
         public Avatar UpdateAvatar(Avatar avatarUpdate)
         {
             var avatarFromDB = FindAvatarById(avatarUpdate.Id);
@@ -69,21 +86,6 @@ namespace SDS.Core.AplicationService.Services
 
             }
             return avatarFromDB;
-        }
-
-        public Avatar DeleteAvatar(int id)
-        {
-           return _avatarRepo.Delete(id);
-        }
-
-        public Avatar Update(Avatar avatar)
-        {
-            if(avatar.Name.Length<1)
-            {
-                throw new InvalidDataException("Name must be atleast 1 charecter");
-            }
-            return _avatarRepo.Update(avatar);
-  
         }
 
         static void ListAvatars()

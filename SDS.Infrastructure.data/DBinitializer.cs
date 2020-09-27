@@ -104,26 +104,26 @@ namespace SDS.Infrastructure.data
             avatarTypeLst.Add(new AvatarType
             {
                 AvatarTypeName = "Cat",
-                AvatarTypeId = Id++
+                Id = AvatarTypeId++
 
             });
 
             avatarTypeLst.Add(new AvatarType
             {
                 AvatarTypeName = "Dog",
-                AvatarTypeId = Id++
+                Id = AvatarTypeId++
 
             });
             avatarTypeLst.Add(new AvatarType
             {
                 AvatarTypeName = "Lion",
-                AvatarTypeId = Id++
+                Id = AvatarTypeId++
 
             });
             avatarTypeLst.Add(new AvatarType
             {
                 AvatarTypeName = "Zebra",
-                AvatarTypeId = Id++
+                Id = AvatarTypeId++
 
             });
 
@@ -134,7 +134,7 @@ namespace SDS.Infrastructure.data
                 Address = "Havnegade",
                 PhoneNumber = "42213184",
                 Email = "Bunny@gmail.com",
-                OwnerId = Id++
+                Id = OwnerId++
 
             });
 
@@ -145,7 +145,7 @@ namespace SDS.Infrastructure.data
                 Address = "Kirkegade",
                 PhoneNumber = "6748282",
                 Email = "RonnieA@gmail.com",
-                OwnerId = Id++
+                Id = OwnerId++
 
             });
 
@@ -181,8 +181,21 @@ namespace SDS.Infrastructure.data
 
         public static int GetNextId()
         {
+           
             return Id++;
            
+        }
+
+        public static int GetNextIdType()
+        {
+            return AvatarTypeId++;
+
+        }
+
+        public static int GetNextIdOwner()
+        {
+            return OwnerId++;
+
         }
     }
 }

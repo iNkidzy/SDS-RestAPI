@@ -17,7 +17,7 @@ namespace SDS.Infrastructure.data.Repositories
             //_ownerLst.Add(owner);
             //return owner;
 
-            owner.OwnerId = DBinitializer.GetNextId();
+            owner.Id = DBinitializer.GetNextId();
             var list = DBinitializer.GetOwners();
             list.Add(owner);
             return owner;
@@ -25,7 +25,7 @@ namespace SDS.Infrastructure.data.Repositories
 
         public Owner Delete(int id)
         {
-            Owner o = GetOwners().Find(x => x.OwnerId == id);
+            Owner o = GetOwners().Find(x => x.Id == id);
             GetOwners().Remove(o);
             if (o != null)
             {
@@ -38,7 +38,7 @@ namespace SDS.Infrastructure.data.Repositories
         public Owner GetOwnerById(int Id)
         {
             var ownerLst = DBinitializer.GetOwners();
-            var owner = ownerLst.Find(x => x.OwnerId == Id);
+            var owner = ownerLst.Find(x => x.Id == Id);
 
             return owner;
         }
@@ -49,21 +49,22 @@ namespace SDS.Infrastructure.data.Repositories
 
         public Owner Update(Owner ownerUpdate)
         {
-            var avatarFromDB = this.GetOwnerById(ownerUpdate.OwnerId);
+            var avatarFromDB = this.GetOwnerById(ownerUpdate.Id);
             if (avatarFromDB != null)
             {
                 avatarFromDB.FirstName = ownerUpdate.FirstName;
                 avatarFromDB.LastName = ownerUpdate.LastName;
                 avatarFromDB.Address = ownerUpdate.Address;
+                avatarFromDB.PhoneNumber = ownerUpdate.PhoneNumber;
                 avatarFromDB.Email = ownerUpdate.Email;
-               
+
 
                 return avatarFromDB;
             }
 
             return null;
-        
-       }
+
+        }
 
         public List<Owner> GetOwners()
         {
